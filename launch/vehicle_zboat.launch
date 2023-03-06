@@ -1,18 +1,39 @@
 <launch>
-    <arg name="operator_host" default="192.168.1.199"/>
+    <arg name="namespace" default="zboat"/>
+    <arg name="operator_ip" default="192.168.50.142"/>
     <arg name="zboat_serial_port" default="/dev/ttyUSB0"/>
 
-    <rosparam command="load" file="$(find project11)/parameters/zboat.yaml" />
-
-
-    <include file="$(find project11)/launch/vehicle_core.launch">
-        <arg name="host" value="$(arg operator_host)"/>
+    <include file="$(find project11)/launch/robot_core.launch">
+        <arg name="namespace" value="$(arg namespace)"/>
     </include>
-    
-    <node pkg="zboat_helm" type="zboat_helm_node.py" name="zboat_helm" args="$(arg zboat_serial_port)"/>
-    <include file="$(find project11)/launch/zboat_camera.launch" />
 
-    <include file="$(find velodyne_pointcloud)/launch/VLP16_points.launch" />
+    <group ns="$(arg namespace)">
+        <!-- <node pkg="zboat_helm" type="zboat_helm_node.py" name="zboat_helm" args="$(arg zboat_serial_port)"/> -->
 
-    <!-- include file="$(find project11)/launch/vehicle_loggers.launch"/ -->
+        <group ns="sensors">
+
+            <include file="$(find zboat_project11)/launch/zboat_camera.launch"/>
+
+            <group ns="gps">
+
+                <node pkg="marine_ais_tools" type="nmea_relay.py" name="gps_listner">
+                    <param name="input_type" value="udp"/>
+                    <param name="input_port" value="5042"/>
+                    <param name="frame_id" value="zboat/gps"/>
+                </node>
+
+                <node pkg="nmea_navsat_driver" type="nmea_topic_driver" name="nmea_navsat">
+                    <remap from="nmea_sentence" to="nmea"/>
+                </node>
+
+                <node pkg="mru_transform" type="sensor_sync_node" name="sensor_sync">
+                </node>
+            </group>
+        </group>
+
+
+        <rosparam command="load" file="$(find zboat_project11)/config/zboat.yaml" />
+        <param name="udp_bridge/remotes/operator/host" value="$(arg operator_ip)"/>
+    </group>
 </launch>
+
