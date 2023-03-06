@@ -6,8 +6,8 @@ udp_bridge/remotes:
 
 project11/platforms/zboat:
   robot_description: zboat/robot_description
-  width: .5
-  length: 2
+  width: 0.5
+  length: 2.0
   nav_sources:
     gps:
       position_topic: /zboat/sensors/gps/fix
