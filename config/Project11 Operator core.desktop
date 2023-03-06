@@ -1,0 +1,8 @@
+[Desktop Entry]
+Comment=
+Terminal=true
+Name=P11 core ZB
+Exec=/home/field/project11/catkin_ws/src/zboat_project11/scripts/start_tmux_operator_core.bash
+Type=Application
+Icon=/home/field/project11/catkin_ws/src/camp/src/camp--icon.png
+

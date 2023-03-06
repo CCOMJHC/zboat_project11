@@ -1,0 +1,21 @@
+<launch>
+    <arg name="namespace" default="operator"/>
+    <arg name="robotNamespace" default="ben"/>
+    <arg name="logDirectory" default="$(find project11)/logs"/>
+
+    <include file="$(find project11)/launch/operator_core.launch">
+        <arg name="operatorJoystick" value="1"/>
+        <arg name="namespace" value="$(arg namespace)"/>
+        <arg name="robotNamespace" value="$(arg robotNamespace)"/>
+    </include>
+
+    <group ns="$(arg namespace)">
+        <node pkg="rosbag" type="record" name="zboat_operator_logger"  ns="$(arg namespace)" args="-o $(arg logDirectory)/zboat_operator --repeat-latched --split --duration=10m --lz4 -a" />
+
+        <rosparam command="load" file="$(find zboat_project11)/config/zboat_operator.yaml"/>
+    </group>
+
+</launch>
+
+
+

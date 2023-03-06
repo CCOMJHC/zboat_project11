@@ -1,0 +1,15 @@
+udp_bridge/remotes:
+    robot:
+        name: zboat
+        host: zeus
+        port: 4200
+
+project11/platforms/zboat:
+  robot_description: zboat/robot_description
+  width: .5
+  length: 2
+  nav_sources:
+    gps:
+      position_topic: /zboat/sensors/gps/fix
+      orientation_topic: /zboat/sensors/gps/heading
+      velocity_topic: /zboat/sensors/gps/vel

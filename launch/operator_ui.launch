@@ -1,0 +1,15 @@
+<launch>
+  <arg name="namespace" default="operator"/>
+  <arg name="robotNamespace" default="zboat"/>
+  <arg name="backgroundChart" default="$(find camp)/workspace/13283/13283_2.KAP"/>
+  <arg name="rqt" default="false"/>
+  <arg name="dual_camp" default="false"/>
+
+  <include file="$(find project11)/launch/operator_ui.launch">
+    <arg name="namespace" value="$(arg namespace)"/>
+    <arg name="robotNamespace" value="$(arg robotNamespace)"/>
+    <arg name="backgroundChart" value="$(arg backgroundChart)"/>
+    <arg name="rqt" value="$(arg rqt)"/>
+    <arg name="dual_camp" value="$(arg dual_camp)"/>
+  </include>
+</launch>
