@@ -1,6 +1,6 @@
 <launch>
     <arg name="namespace" default="operator"/>
-    <arg name="robotNamespace" default="ben"/>
+    <arg name="robotNamespace" default="zboat"/>
     <arg name="logDirectory" default="$(find project11)/logs"/>
 
     <include file="$(find project11)/launch/operator_core.launch">
