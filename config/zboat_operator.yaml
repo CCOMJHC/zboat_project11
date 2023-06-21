@@ -1,6 +1,8 @@
 udp_bridge/remotes:
-    robot:
-        name: zboat
+  robot:
+    name: zboat
+    connections:
+      default:
         host: zeus
         port: 4200
 

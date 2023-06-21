@@ -33,7 +33,7 @@
 
 
         <rosparam command="load" file="$(find zboat_project11)/config/zboat.yaml" />
-        <param name="udp_bridge/remotes/operator/host" value="$(arg operator_ip)"/>
+        <param name="udp_bridge/remotes/operator/connections/default/host" value="$(arg operator_ip)"/>
     </group>
 </launch>
 
